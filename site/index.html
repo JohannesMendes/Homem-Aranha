@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>It's okay, I'm Spider-Man</title>
+<meta name="description" content="It's okay, I'm both of Spider-Man and Peter Parker — por @jocore.digital">
+<meta name="theme-color" content="#000000">
+<link rel="preload" as="image" href="assets/logo.webp">
+<style>
+@font-face{font-family:'Montserrat';font-weight:800;font-display:swap;src:url(vendor/montserrat-latin-800-normal.woff2) format('woff2')}
+@font-face{font-family:'Gabriela';font-weight:400;font-display:swap;src:url(vendor/gabriela-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Caslon';font-weight:400;font-display:swap;src:url(vendor/libre-caslon-text-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Yellowtail';font-weight:400;font-display:swap;src:url(vendor/yellowtail-latin-400-normal.woff2) format('woff2')}
+
+:root{--red:#e8203a;--blood:#7a0c0c;--ink:#000}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#000;scrollbar-width:none}
+html::-webkit-scrollbar{display:none}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{background:#000;color:#fff;font-family:'Montserrat',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:none;user-select:none;-webkit-user-drag:none}
+a{color:inherit}
+
+/* ---------- 16:9 stage: every slide is laid out on a 1920×1080 grid ---------- */
+.slide,.sky{container-type:inline-size;--p:calc(100cqw / 1920)}
+.slide{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000}
+.sky{position:relative;overflow:hidden;background:#000}
+.sky .slide{background:transparent}
+.abs{position:absolute}
+.ceil{position:absolute;left:0;right:0;top:30.5556%;bottom:0;overflow:hidden}
+
+/* ---------- chrome ---------- */
+#bar{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--red);transform-origin:0 50%;transform:scaleX(0);z-index:90;box-shadow:0 0 12px var(--red)}
+#nav{position:fixed;right:clamp(10px,1.6vw,26px);top:50%;transform:translateY(-50%);z-index:80;display:flex;flex-direction:column;gap:14px;mix-blend-mode:difference}
+#nav button{width:12px;height:12px;border-radius:50%;border:2px solid #fff;background:transparent;cursor:pointer;transition:transform .3s,background .3s}
+#nav button:hover{transform:scale(1.5)}
+#nav button.on{background:#fff;transform:scale(1.4)}
+#trail{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:85;mix-blend-mode:difference}
+#pre{position:fixed;inset:0;background:#000;z-index:100;display:grid;place-items:center}
+#pre .in{width:min(60vw,560px);text-align:center}
+#pre img{width:100%;opacity:0;transform:scale(.9)}
+#pre .ln{height:3px;background:#222;margin-top:26px;overflow:hidden}
+#pre .ln i{display:block;height:100%;width:100%;background:var(--red);transform:scaleX(0);transform-origin:0 50%}
+@media (max-width:700px){#nav{display:none}}
+@media (pointer:coarse){#trail{display:none}}
+
+/* ---------- 1 · HERO ---------- */
+.sky-img{position:absolute;left:calc(-44*var(--p));top:calc(23*var(--p));width:104%;height:auto;will-change:transform}
+.sky-glow{position:absolute;left:0;right:0;top:20%;height:30%;background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(232,32,58,.35),transparent 70%);mix-blend-mode:screen;opacity:.0}
+.h-thread{position:absolute;left:0;width:100%;top:calc(228*var(--p));height:calc(34*var(--p));background:url(assets/thread.webp) repeat-x 0 0/auto 100%}
+.h-hand{position:absolute;left:calc(-124*var(--p));top:calc(40*var(--p));width:calc(565*var(--p))}
+.h-hand img{width:100%}
+.h-logo{position:absolute;left:17.7%;top:9.9%;width:58.85%}
+.h-logo img{width:100%;filter:drop-shadow(0 0 0 rgba(232,32,58,0))}
+.h-flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(255,60,60,.55),transparent 60%);opacity:0;pointer-events:none}
+.h-hint{position:absolute;left:50%;bottom:2.2%;translate:-50% 0;font-size:calc(11*var(--p)*1.4);letter-spacing:.5em;color:#fff;opacity:.55;display:flex;flex-direction:column;align-items:center;gap:calc(10*var(--p))}
+.h-hint i{display:block;width:1px;height:calc(46*var(--p));background:linear-gradient(#fff,transparent);animation:drip 1.8s ease-in-out infinite;transform-origin:0 0}
+@keyframes drip{0%{transform:scaleY(0)}60%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* ---------- 2 · PETER ---------- */
+.p-hand{position:absolute;left:calc(376*var(--p));bottom:calc(-25*var(--p));width:calc(893*var(--p))}
+.p-hand img{width:100%;transform:rotate(180deg)}
+.p-mask{position:absolute;left:calc(563*var(--p));top:0;width:calc(1360*var(--p))}
+.p-mask img{width:100%}
+.p-yess{position:absolute;left:calc(1077*var(--p));top:0;width:calc(513*var(--p))}
+.p-yess img{width:100%}
+.p-thread{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+
+/* ---------- 3 · GLASSES ---------- */
+#s3{background:#fff}
+.g-glasses{position:absolute;left:calc(490*var(--p));top:0;width:calc(726*var(--p))}
+.g-sway{transform-origin:50.5% 0}
+.g-glasses img{width:100%}
+.g-text{position:absolute;left:calc(1080*var(--p));top:calc(89*var(--p));width:calc(859*var(--p));aspect-ratio:1}
+.g-line{position:absolute;inset:0}
+.g-line img{width:100%;height:100%}
+
+/* ---------- 4 · WEB ---------- */
+.w-web{position:absolute;inset:0}
+.w-web img{position:absolute;inset:0;width:100%;height:100%}
+.w-spider{position:absolute;inset:0;clip-path:ellipse(15% 31% at 78.5% 67%);animation:twitch 3.2s steps(1) infinite;transform-origin:78% 68%}
+@keyframes twitch{0%{transform:none}8%{transform:translate(3px,-2px) rotate(.9deg)}10%{transform:translate(-2px,2px) rotate(-.7deg)}12%{transform:none}55%{transform:none}58%{transform:translate(-3px,1px) rotate(-1deg) scale(1.01)}60%{transform:translate(2px,-1px) rotate(.8deg)}62%{transform:none}}
+.w-spider-glow{position:absolute;left:62%;top:42%;width:34%;height:46%;background:radial-gradient(circle,rgba(150,0,0,.14),transparent 65%);animation:glow 3s ease-in-out infinite;mix-blend-mode:screen;pointer-events:none}
+@keyframes glow{50%{opacity:.25}}
+.w-lego{position:absolute;left:6.5%;bottom:-.7%;width:31%}
+.w-lego .shake{will-change:translate,rotate}
+.w-lego img{width:100%}
+
+/* ---------- 5 · QUOTES ---------- */
+.q-panel{position:absolute;top:0;height:100%;width:35.2%;z-index:2}
+.q-panel img{width:100%;height:100%;object-fit:fill}
+.q-l{left:-.4%}.q-r{right:-1.2%;width:38.5%}
+.q-pose{position:absolute;left:33%;bottom:0;width:35.6%}
+.q-pose img{width:100%;}
+.q-text{position:absolute;z-index:3}
+.q-text .m{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.q-text .m>span{display:block}
+.q-tl{left:calc(110*var(--p));top:calc(205*var(--p));font-family:'Gabriela',Georgia,serif;font-weight:400;font-size:calc(104*var(--p));line-height:calc(124*var(--p));color:#fff;white-space:nowrap}
+.q-tr{left:calc(1368*var(--p));top:calc(205*var(--p));font-weight:800;font-size:calc(72*var(--p));line-height:calc(79*var(--p));letter-spacing:.06em;color:#fff;white-space:nowrap}
+
+/* ---------- 6 · FINAL ---------- */
+.f-title{position:absolute;left:0;right:0;top:calc(190*var(--p));text-align:center;font-family:'Caslon',Georgia,serif;color:var(--red);line-height:.9;text-shadow:0 0 calc(60*var(--p)) rgba(232,32,58,.22);transform:rotate(-1.5deg) skewX(-3deg) scaleX(.93)}
+.f-title .row{display:block;white-space:nowrap}
+.f-title .ch{display:inline-block;transform-origin:50% 100%;cursor:default}
+.f-title .r1{font-size:calc(162*var(--p));letter-spacing:-.06em}
+.f-title .r1 .big{font-size:calc(214*var(--p))}
+.f-title .r2{font-size:calc(221*var(--p));letter-spacing:-.065em;margin-top:calc(20*var(--p))}
+.f-handle{position:absolute;left:calc(170*var(--p));bottom:calc(10*var(--p));font-family:'Yellowtail',cursive;font-size:calc(92*var(--p));text-decoration:none;color:#fff;transition:color .3s,letter-spacing .3s;display:inline-block}
+.f-handle:hover{color:var(--red);letter-spacing:.04em}
+.f-top{position:absolute;right:calc(70*var(--p));bottom:calc(70*var(--p));font-size:calc(22*var(--p));letter-spacing:.35em;text-decoration:none;color:#fff;opacity:.6;border:0;background:none;cursor:pointer;font-family:inherit;font-weight:800}
+.f-top:hover{opacity:1;color:var(--red)}
+
+.mp{translate:calc(var(--mx,0)*var(--d,0)*1px) calc(var(--my,0)*var(--d,0)*1px)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+<nav id="nav" aria-label="Seções"></nav>
+<canvas id="trail"></canvas>
+
+<div id="pre" aria-hidden="true"><div class="in"><img src="assets/logo.webp" alt=""><div class="ln"><i></i></div></div></div>
+
+<main>
+
+<!-- 1 + 2 · skyline contínua -->
+<div class="sky" id="sky">
+  <img class="sky-img" src="assets/skyline.webp" alt="" width="1800" height="1332">
+  <div class="sky-glow"></div>
+
+  <section class="slide" id="s1" aria-label="Spider-Man">
+    <div class="abs h-rig" style="inset:0"><div class="mp" style="--d:-10;position:absolute;inset:0">
+      <div class="h-thread"></div>
+      <div class="h-hand"><div class="in"><img src="assets/hand-web.webp" alt="Mão do Homem-Aranha lançando teia"></div></div>
+    </div></div>
+    <div class="h-logo"><div class="mp" style="--d:14"><img src="assets/logo.webp" alt="Spider-Man"></div></div>
+    <div class="h-flash"></div>
+    <div class="h-hint">ROLE<i></i></div>
+  </section>
+
+  <section class="slide" id="s2" aria-label="Peter Parker">
+    <div class="ceil">
+      <svg class="p-thread" viewBox="0 0 1920 750" preserveAspectRatio="none" aria-hidden="true">
+        <path id="pth" d="M832 470 C 834 570, 850 680, 858 760" fill="none" stroke="#bfb3a3" stroke-width="4.2" stroke-linecap="round"/>
+      </svg>
+      <div class="p-hand"><div class="in"><img src="assets/hand.webp" alt="Mão pendurada na teia"></div></div>
+      <div class="p-mask"><div class="in"><img src="assets/mask.webp" alt="Máscara do Homem-Aranha"></div></div>
+      <div class="p-yess"><div class="mp" style="--d:8"><img src="assets/yess.webp" alt="Yess I'm Peter Parker"></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- 3 · óculos -->
+<section class="slide" id="s3" aria-label="Spider-Man e Peter Parker">
+  <div class="g-glasses"><div class="drop"><div class="g-sway"><img src="assets/glasses.webp" alt="Óculos de sol presos na teia, autografados por Stan Lee"></div></div></div>
+  <div class="g-text" role="img" aria-label="It's okay I'm both of Spiderman and Peter Parker"><div class="mp" style="--d:6;position:absolute;inset:0">
+    <div class="g-line" style="clip-path:inset(0 0 66.7% 0)"><div class="in" style="height:100%"><img src="assets/glasses-text.webp" alt=""></div></div>
+    <div class="g-line" style="clip-path:inset(33.3% 0 55% 0)"><div class="in" style="height:100%"><img src="assets/glasses-text.webp" alt=""></div></div>
+    <div class="g-line" style="clip-path:inset(45% 0 43.2% 0)"><div class="in" style="height:100%"><img src="assets/glasses-text.webp" alt=""></div></div>
+    <div class="g-line" style="clip-path:inset(56.8% 0 31.5% 0)"><div class="in" style="height:100%"><img src="assets/glasses-text.webp" alt=""></div></div>
+    <div class="g-line" style="clip-path:inset(68.5% 0 0 0)"><div class="in" style="height:100%"><img src="assets/glasses-text.webp" alt=""></div></div>
+  </div></div>
+</section>
+
+<!-- 4 · teia + lego -->
+<section class="slide" id="s4" aria-label="Sentido aranha">
+  <div class="w-web"><img src="assets/web.webp" alt=""><img class="w-spider" src="assets/web.webp" alt=""></div>
+  <div class="w-spider-glow"></div>
+  <div class="w-lego"><div class="mp" style="--d:-8"><div class="pop"><div class="shake"><img src="assets/lego.webp" alt="Lego Homem-Aranha com o sentido aranha disparado"></div></div></div></div>
+</section>
+
+<!-- 5 · frases -->
+<section class="slide" id="s5" aria-label="Frases">
+  <div class="q-panel q-l"><img src="assets/paper-l.webp" alt=""></div>
+  <div class="q-panel q-r"><img src="assets/paper-r.webp" alt=""></div>
+  <div class="q-pose"><div class="mp" style="--d:10"><div class="in"><img src="assets/pose.webp" alt="Homem-Aranha em posição de lançar teia"></div></div></div>
+  <p class="q-text q-tl">
+    <span class="m"><span>E se a vida</span></span><span class="m"><span>se tornar</span></span><span class="m"><span>uma</span></span><span class="m"><span>barra, que</span></span><span class="m"><span>seja de</span></span><span class="m"><span>chocolate!</span></span>
+  </p>
+  <p class="q-text q-tr">
+    <span class="m"><span>NENHUM</span></span><span class="m"><span>PROBLEMA</span></span><span class="m"><span>PODE SER</span></span><span class="m"><span>RESOLVID</span></span><span class="m"><span>O PELO</span></span><span class="m"><span>MESMO</span></span><span class="m"><span>ESTADO DE</span></span><span class="m"><span>CONSCIÊN</span></span><span class="m"><span>CIA QUE O</span></span><span class="m"><span>CRIOU.</span></span>
+  </p>
+</section>
+
+<!-- 6 · final -->
+<section class="slide" id="s6" aria-label="It's okay I'm Spider-Man">
+  <h2 class="f-title" aria-label="It's okay I'm spiderman">
+    <span class="row r1" aria-hidden="true"></span>
+    <span class="row r2" aria-hidden="true"></span>
+  </h2>
+  <a class="f-handle" href="https://www.instagram.com/jocore.digital/" target="_blank" rel="noopener">@jocore.digital</a>
+  <button class="f-top" type="button" data-top>TOPO ↑</button>
+</section>
+
+</main>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script>
+(() => {
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer:fine)').matches;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ----- smooth scroll (Lenis ↔ ScrollTrigger) ----- */
+  let vel = 0;
+  const lenis = new Lenis({ lerp: reduce ? 1 : 0.09 });
+  lenis.on('scroll', e => { ScrollTrigger.update(); vel = e.velocity || 0; });
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+  lenis.stop();
+
+  /* ----- progress bar + nav dots ----- */
+  gsap.to('#bar', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.2 } });
+  const names = ['Início', 'Peter Parker', 'Óculos', 'Sentido aranha', 'Frases', 'Final'];
+  const nav = $('#nav');
+  ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6'].forEach((id, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('aria-label', names[i]);
+    b.onclick = () => lenis.scrollTo(id, { duration: 1.6 });
+    nav.appendChild(b);
+    ScrollTrigger.create({ trigger: id, start: 'top 55%', end: 'bottom 55%',
+      onToggle: s => s.isActive && $$('button', nav).forEach((d, k) => d.classList.toggle('on', k === i)) });
+  });
+  $('[data-top]').onclick = () => lenis.scrollTo(0, { duration: 2.4 });
+
+  /* ----- mouse parallax (CSS vars → .mp wrappers) ----- */
+  if (fine && !reduce) {
+    const root = document.documentElement; let tx = 0, ty = 0, cx = 0, cy = 0;
+    addEventListener('pointermove', e => { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; });
+    gsap.ticker.add(() => { cx += (tx - cx) * .07; cy += (ty - cy) * .07;
+      root.style.setProperty('--mx', (cx * 2).toFixed(3)); root.style.setProperty('--my', (cy * 2).toFixed(3)); });
+  }
+
+  /* ----- web-thread cursor trail ----- */
+  if (fine && !reduce) {
+    const cv = $('#trail'), ctx = cv.getContext('2d'); let pts = [], dpr = Math.min(devicePixelRatio, 2);
+    const fit = () => { cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    fit(); addEventListener('resize', fit);
+    addEventListener('pointermove', e => pts.push({ x: e.clientX, y: e.clientY, t: performance.now() }));
+    gsap.ticker.add(() => {
+      const now = performance.now(); pts = pts.filter(p => now - p.t < 650);
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      if (pts.length < 2) return;
+      ctx.lineCap = 'round'; ctx.strokeStyle = '#fff';
+      for (let i = 1; i < pts.length; i++) {
+        const a = 1 - (now - pts[i].t) / 650; ctx.globalAlpha = Math.max(a, 0) * .9; ctx.lineWidth = 1 + a * 2.2;
+        ctx.beginPath(); ctx.moveTo(pts[i - 1].x, pts[i - 1].y); ctx.lineTo(pts[i].x, pts[i].y); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    });
+  }
+
+  /* ----- slide 6 text: letters ----- */
+  const rows = [
+    [['It’s ', ''], ['okay ', 'big'], ['I’m', '']],
+    [['spiderman', '']]
+  ];
+  $$('.f-title .row').forEach((row, ri) => {
+    rows[ri].forEach(([txt, cls]) => {
+      const w = document.createElement('span'); if (cls) w.className = cls;
+      [...txt].forEach(c => { const s = document.createElement('span'); s.className = 'ch'; s.innerHTML = c === ' ' ? '&nbsp;' : c; w.appendChild(s); });
+      row.appendChild(w);
+    });
+  });
+  $$('.f-title .ch').forEach(ch => ch.addEventListener('pointerenter', () =>
+    gsap.fromTo(ch, { y: 0, rotate: 0 }, { y: -26, rotate: gsap.utils.random(-10, 10), duration: .18, yoyo: true, repeat: 1, ease: 'power2.out', overwrite: true })));
+
+  /* ----- initial states ----- */
+  if (!reduce) {
+    gsap.set('.sky-img', { opacity: 0 });
+    gsap.set('.h-thread', { clipPath: 'inset(0 100% 0 0)' });
+    gsap.set('.h-hand .in', { xPercent: -40, rotate: -14, transformOrigin: '0% 60%' });
+    gsap.set('.h-logo img', { opacity: 0, scale: 1.7, filter: 'blur(14px)' });
+    gsap.set('.h-hint', { opacity: 0 });
+  }
+
+  /* ----- intro ----- */
+  const preImg = $('#pre img'), preBar = $('#pre i');
+  gsap.to(preImg, { opacity: 1, scale: 1, duration: .8, ease: 'power3.out' });
+  const loaded = new Promise(r => addEventListener('load', r, { once: true }));
+  const bar = gsap.to(preBar, { scaleX: .85, duration: 1.4, ease: 'power1.out' });
+  Promise.all([loaded, document.fonts ? document.fonts.ready : 0, new Promise(r => setTimeout(r, 1100))]).then(() => {
+    bar.kill(); gsap.to(preBar, { scaleX: 1, duration: .25 });
+    const tl = gsap.timeline({ delay: .3, defaults: { ease: 'power3.out' }, onComplete: idle });
+    tl.to('#pre', { yPercent: -100, duration: .9, ease: 'power4.inOut', onComplete: () => { $('#pre').remove(); lenis.start(); } })
+      .to('.sky-img', { opacity: 1, duration: 1.6 }, '-=.5')
+      .fromTo('.sky-img', { yPercent: 5 }, { yPercent: 0, duration: 1.8 }, '<')
+      .to('.h-hand .in', { xPercent: 0, rotate: 0, duration: 1.1 }, '<+.1')
+      .to('.h-thread', { clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power2.inOut' }, '<+.25')
+      .to('.h-logo img', { opacity: 1, scale: 1, filter: 'blur(0px)', duration: .9, ease: 'expo.out' }, '-=.8')
+      .fromTo('.h-flash', { opacity: .9 }, { opacity: 0, duration: .8 }, '<')
+      .fromTo('.h-logo img', { x: -8 }, { x: 0, duration: .5, ease: 'elastic.out(2,.2)' }, '<+.25')
+      .to('.h-hint', { opacity: .55, duration: .8 }, '-=.2');
+  });
+
+  function idle() {
+    if (reduce) return;
+    gsap.to('.h-logo img', { filter: 'drop-shadow(0 0 14px rgba(232,32,58,.5))', duration: 2.2, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    gsap.to('.sky-glow', { opacity: .9, duration: 3, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    // city lights flicker
+    (function f() { gsap.to('.sky-img', { opacity: gsap.utils.random(.88, 1), duration: .08, onComplete: () => gsap.delayedCall(gsap.utils.random(.4, 2.2), f) }); })();
+  }
+
+  if (reduce) { lenis.start(); $('#pre').remove(); return; }
+
+  /* ===================== scroll animations ===================== */
+
+  /* 1 · hero parallax */
+  const heroST = { trigger: '#s1', start: 'top top', end: 'bottom top', scrub: true };
+  gsap.to('.h-logo', { yPercent: 28, scale: .94, ease: 'none', scrollTrigger: heroST });
+  gsap.to('.h-rig', { yPercent: 12, ease: 'none', scrollTrigger: heroST });
+  gsap.to('.h-hint', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '#s1', start: 'top top', end: '15% top', scrub: true } });
+  gsap.to('.sky-img', { yPercent: -3.5, ease: 'none', scrollTrigger: { trigger: '#sky', start: 'top top', end: 'bottom bottom', scrub: true } });
+
+  /* 2 · Peter */
+  gsap.fromTo('.p-hand', { yPercent: -100 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#s2', start: 'top 85%', end: 'top 20%', scrub: .7 } });
+  gsap.fromTo('.p-mask .in', { xPercent: 70, rotate: 28, transformOrigin: '100% 0%' },
+    { xPercent: 0, rotate: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '#s2', start: 'top 55%' } });
+  gsap.fromTo('.p-yess img', { clipPath: 'inset(0 100% 0 0)', x: -30 },
+    { clipPath: 'inset(0 0% 0 0)', x: 0, duration: 1.3, ease: 'power3.inOut', scrollTrigger: { trigger: '#s2', start: 'top 45%' } });
+  const pth = $('#pth'), L = pth.getTotalLength();
+  gsap.set(pth, { strokeDasharray: L, strokeDashoffset: L });
+  gsap.to(pth, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '#s2', start: 'top 20%', end: 'bottom 60%', scrub: .6 } });
+
+  /* 3 · óculos */
+  gsap.set('.g-sway', { rotate: -2.4 });
+  gsap.to('.g-sway', { rotate: 2.4, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  const g = gsap.timeline({ scrollTrigger: { trigger: '#s3', start: 'top 50%' } });
+  g.fromTo('.g-glasses .drop', { yPercent: -108 }, { yPercent: 0, duration: 1.8, ease: 'elastic.out(1,.5)' })
+   .fromTo('.g-line', { y: 46, opacity: 0, rotate: -3 }, { y: 0, opacity: 1, rotate: 0, stagger: .14, duration: .8, ease: 'back.out(2.2)' }, 0.35);
+
+  /* 4 · teia + lego */
+  gsap.fromTo('.w-web', { clipPath: 'circle(0% at 100% 0%)' }, { clipPath: 'circle(150% at 100% 0%)', duration: 2.2, ease: 'power2.inOut', scrollTrigger: { trigger: '#s4', start: 'top 65%' } });
+  gsap.fromTo('.w-lego .pop', { yPercent: 55, scale: .7, opacity: 0, transformOrigin: '50% 100%' }, { yPercent: 0, scale: 1, opacity: 1, duration: 1, ease: 'back.out(2.2)', scrollTrigger: { trigger: '#s4', start: 'top 45%' } });
+  gsap.fromTo('.w-spider', { opacity: 0 }, { opacity: 1, duration: 1.2, delay: .8, scrollTrigger: { trigger: '#s4', start: 'top 55%' } });
+  gsap.to('.w-web', { scale: 1.03, ease: 'none', transformOrigin: '100% 0%', scrollTrigger: { trigger: '#s4', start: 'top bottom', end: 'bottom top', scrub: true } });
+  // spider-sense: lego vibrates harder the faster you scroll
+  const shake = $('.w-lego .shake'); let on = false, tick = 0;
+  ScrollTrigger.create({ trigger: '#s4', start: 'top bottom', end: 'bottom top', onToggle: s => { on = s.isActive; if (!on) { shake.style.translate = ''; shake.style.rotate = ''; } } });
+  gsap.ticker.add(() => {
+    if (!on || (tick++ & 1)) return;
+    const a = 1.4 + Math.min(Math.abs(vel) * .6, 9);
+    shake.style.translate = `${(Math.random() - .5) * a}px ${(Math.random() - .5) * a}px`;
+    shake.style.rotate = `${(Math.random() - .5) * a * .22}deg`;
+  });
+
+  /* 5 · frases */
+  const q = gsap.timeline({ scrollTrigger: { trigger: '#s5', start: 'top 55%' } });
+  q.from('.q-l', { xPercent: -105, duration: 1.1, ease: 'power4.out' })
+   .from('.q-r', { xPercent: 105, duration: 1.1, ease: 'power4.out' }, '<')
+   .from('.q-pose', { yPercent: 28, scale: .82, opacity: 0, duration: 1.3, ease: 'back.out(1.3)', transformOrigin: '50% 100%' }, '-=.8')
+   .from('.q-tl .m>span', { yPercent: 115, rotate: 4, stagger: .09, duration: .8, ease: 'power3.out' }, '-=.9')
+   .from('.q-tr .m>span', { yPercent: 115, rotate: -4, stagger: .07, duration: .8, ease: 'power3.out' }, '<+.15');
+  gsap.to('.q-pose .in', { y: -10, scale: 1.015, duration: 3.2, yoyo: true, repeat: -1, ease: 'sine.inOut', transformOrigin: '50% 100%' });
+
+  /* 6 · final */
+  const f = gsap.timeline({ scrollTrigger: { trigger: '#s6', start: 'top 50%' } });
+  f.from('.f-title .r1 .ch', { yPercent: 130, rotate: 14, opacity: 0, stagger: .045, duration: .8, ease: 'back.out(2)' })
+   .from('.f-title .r2 .ch', { yPercent: 130, rotate: -14, opacity: 0, stagger: .05, duration: .9, ease: 'back.out(2)' }, '-=.4')
+   .from('.f-handle', { x: -60, opacity: 0, duration: .9, ease: 'power3.out' }, '-=.4')
+   .from('.f-top', { opacity: 0, duration: .8 }, '<');
+  gsap.to('.f-title', { textShadow: '0 0 90px rgba(232,32,58,.6)', duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+})();
+</script>
+</body>
+</html>
